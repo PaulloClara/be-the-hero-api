@@ -1,0 +1,11 @@
+{
+  "name": "be-the-hero-api",
+  "version": "0.0.1",
+  "main": "src/server.js",
+  "repository": "https://github.com/paulloclara/be-the-hero-api.git",
+  "author": "paulloclara <paulloclara@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ."
+  }
+}
