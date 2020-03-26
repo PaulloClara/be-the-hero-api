@@ -1,3 +1,7 @@
 const routes = require("express").Router();
 
-module.exports = routers;
+const OngController = require("./controllers/ong");
+
+routes.post("/ongs", OngController.store);
+
+module.exports = routes;
