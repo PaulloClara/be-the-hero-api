@@ -6,9 +6,13 @@
   "author": "paulloclara <paulloclara@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
