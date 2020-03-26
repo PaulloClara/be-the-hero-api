@@ -1,3 +1,6 @@
+# Custom
+src/database/db.sqlite3
+
 # Logs
 logs
 *.log
