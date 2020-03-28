@@ -7,6 +7,14 @@ module.exports = {
     this.newError(message, 400);
   },
 
+  unauthorized(message) {
+    this.newError(message, 401);
+  },
+
+  forbidden(message) {
+    this.newError(message, 403);
+  },
+
   notFound(message) {
     this.newError(message, 404);
   },
