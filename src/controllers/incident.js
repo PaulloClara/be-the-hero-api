@@ -30,8 +30,8 @@ module.exports = {
 
   async store(request, response) {
     try {
+      const { id: ong_id } = request.auth;
       const { title, description, value } = request.body;
-      const ong_id = request.headers.authorization;
 
       const [id] = await database("incidents").insert({
         title,
@@ -54,12 +54,13 @@ module.exports = {
   async delete(request, response) {
     try {
       const { id } = request.params;
-      const ong_id = request.headers.authorization;
+      const { id: ong_id } = request.auth;
 
       const incident = await database("incidents")
         .where("id", id)
         .select("ong_id")
         .first();
+      if (!incident) return response.error.notFound("Incident not found");
 
       if (incident.ong_id !== ong_id)
         return response.status(401).json({ error: "Operation not permitted" });

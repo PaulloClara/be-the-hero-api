@@ -3,7 +3,7 @@ const database = require("../database");
 module.exports = {
   async index(request, response) {
     try {
-      const ong_id = request.headers.authorization;
+      const { id: ong_id } = request.auth;
 
       const incidents = await database("incidents")
         .where("ong_id", ong_id)

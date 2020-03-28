@@ -8,8 +8,10 @@ module.exports = {
   },
 
   verify(token) {
-    return jwt.verify(token, process.env.JWT_PRIVATE_KEY, (error, result) =>
-      error ? null : result
+    return jwt.verify(
+      token,
+      process.env.JWT_PRIVATE_KEY,
+      (error, result) => result || null
     );
   }
 };
