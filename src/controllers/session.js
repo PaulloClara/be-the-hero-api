@@ -2,15 +2,19 @@ const database = require("../database");
 
 module.exports = {
   async store(request, response) {
-    const { id } = request.body;
+    try {
+      const { id } = request.body;
 
-    const ong = await database("ongs")
-      .where("id", id)
-      .select("name")
-      .first();
+      const ong = await database("ongs")
+        .where("id", id)
+        .select("name")
+        .first();
 
-    if (!ong) return response.status(404).json({ error: "Ong not found" });
+      if (!ong) return response.error.notFound("Ong not found");
 
-    return response.status(200).json(ong);
+      return response.status(200).json(ong);
+    } catch (error) {
+      return response.error.internalError(error);
+    }
   }
 };
