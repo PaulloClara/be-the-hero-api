@@ -2,7 +2,6 @@ const routes = require("express").Router();
 
 const OngController = require("./controllers/ong");
 const SessionController = require("./controllers/session");
-const ProfileController = require("./controllers/profile");
 const IncidentController = require("./controllers/incident");
 
 const AuthMiddlewares = require("./middlewares/auth");
@@ -11,12 +10,11 @@ const HandleRequestMiddlewares = require("./middlewares/handle-request");
 routes.use(HandleRequestMiddlewares);
 
 routes.get("/ongs", OngController.index);
-routes.get("/ongs/:id", OngController.show);
 routes.post("/ongs", OngController.store);
 
+routes.get("/sessions", AuthMiddlewares, SessionController.index);
+routes.get("/sessions/incidents", AuthMiddlewares, SessionController.show);
 routes.post("/sessions", SessionController.store);
-
-routes.get("/profile", AuthMiddlewares, ProfileController.index);
 
 routes.get("/incidents", IncidentController.index);
 routes.post("/incidents", AuthMiddlewares, IncidentController.store);

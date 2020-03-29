@@ -32,30 +32,6 @@ module.exports = {
     }
   },
 
-  async show(request, response) {
-    try {
-      const { id } = request.params;
-
-      const ong = await database("ongs")
-        .where("id", id)
-        .first()
-        .select([
-          "id",
-          "name",
-          "email",
-          "whatsapp",
-          "city",
-          "uf",
-          "created_at"
-        ]);
-      if (!ong) return response.error.notFound("Ong not found");
-
-      return response.status(200).json(ong);
-    } catch (error) {
-      return response.error.internalError(error);
-    }
-  },
-
   async store(request, response) {
     try {
       const { name, email, password, whatsapp, city, uf } = request.body;
