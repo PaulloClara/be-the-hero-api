@@ -11,6 +11,7 @@ const HandleRequestMiddlewares = require("./middlewares/handle-request");
 routes.use(HandleRequestMiddlewares);
 
 routes.get("/ongs", OngController.index);
+routes.get("/ongs/:id", OngController.show);
 routes.post("/ongs", OngController.store);
 
 routes.post("/sessions", SessionController.store);
