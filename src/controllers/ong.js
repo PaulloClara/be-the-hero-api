@@ -8,15 +8,23 @@ const database = require("../database");
 module.exports = {
   async index(request, response) {
     try {
-      const ongs = await database("ongs").select([
-        "id",
-        "name",
-        "email",
-        "whatsapp",
-        "city",
-        "uf",
-        "created_at"
-      ]);
+      const { page = 1 } = request.query;
+
+      const ongs = await database("ongs")
+        .limit(12)
+        .offset((page - 1) * 12)
+        .select([
+          "id",
+          "name",
+          "email",
+          "whatsapp",
+          "city",
+          "uf",
+          "created_at"
+        ]);
+
+      const [count] = await database("ongs").count();
+      response.header("X-Total-Count", count["count(*)"]);
 
       return response.status(200).json(ongs);
     } catch (error) {
