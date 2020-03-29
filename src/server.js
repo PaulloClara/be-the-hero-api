@@ -5,6 +5,7 @@ const server = express();
 
 server.use(require("cors")());
 server.use(express.json());
+server.use(require("morgan")("tiny"));
 server.use(require("./routes"));
 
 const PORT = 3000;
