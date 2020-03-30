@@ -55,7 +55,12 @@ module.exports = {
         ong_id
       });
 
-      return response.status(200).json({ id });
+      const incident = await database("incidents")
+        .where("id", id)
+        .first()
+        .select(["title", "description", "value", "created_at"]);
+
+      return response.status(200).json({ id, ...incident });
     } catch (error) {
       return response.error.internalError(error);
     }

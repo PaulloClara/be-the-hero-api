@@ -54,9 +54,14 @@ module.exports = {
         uf
       });
 
+      const newOng = await database("ongs")
+        .where("id", id)
+        .first()
+        .select(["name", "email", "whatsapp", "city", "uf", "created_at"]);
+
       const token = await jwt.sign(id);
 
-      return response.status(200).json({ id, token });
+      return response.status(200).json({ ong: { id, ...newOng }, token });
     } catch (error) {
       return response.error.internalError(error);
     }
