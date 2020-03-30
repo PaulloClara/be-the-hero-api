@@ -4,20 +4,37 @@ const OngController = require("./controllers/ong");
 const SessionController = require("./controllers/session");
 const IncidentController = require("./controllers/incident");
 
-const AuthMiddlewares = require("./middlewares/auth");
-const HandleRequestMiddlewares = require("./middlewares/handle-request");
+const AuthorizationMiddleware = require("./middlewares/auth");
+const HandleMiddleware = require("./middlewares/handle");
 
-routes.use(HandleRequestMiddlewares);
+routes.use(HandleMiddleware.setHandleError);
 
 routes.get("/ongs", OngController.index);
-routes.post("/ongs", OngController.store);
+routes.post("/ongs", HandleMiddleware.ongRegister, OngController.store);
 
-routes.get("/sessions", AuthMiddlewares, SessionController.index);
-routes.get("/sessions/incidents", AuthMiddlewares, SessionController.show);
-routes.post("/sessions", SessionController.store);
+routes.get("/sessions", AuthorizationMiddleware, SessionController.index);
+routes.get(
+  "/sessions/incidents",
+  AuthorizationMiddleware,
+  SessionController.show
+);
+routes.post(
+  "/sessions",
+  HandleMiddleware.createSession,
+  SessionController.store
+);
 
 routes.get("/incidents", IncidentController.index);
-routes.post("/incidents", AuthMiddlewares, IncidentController.store);
-routes.delete("/incidents/:id", AuthMiddlewares, IncidentController.delete);
+routes.post(
+  "/incidents",
+  AuthorizationMiddleware,
+  HandleMiddleware.incidentRegister,
+  IncidentController.store
+);
+routes.delete(
+  "/incidents/:id",
+  AuthorizationMiddleware,
+  IncidentController.delete
+);
 
 module.exports = routes;
