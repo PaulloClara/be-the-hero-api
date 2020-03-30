@@ -6,9 +6,10 @@
   "author": "paulloclara <paulloclara@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon .",
-    "knex": "knex"
+    "start": "ENV=production node .",
+    "dev": "ENV=development nodemon .",
+    "knex": "knex",
+    "test": "ENV=test jest"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -22,6 +23,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
+    "jest": "^25.2.4",
     "nodemon": "^2.0.2"
   }
 }
