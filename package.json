@@ -10,6 +10,7 @@
     "dev": "ENV=development nodemon .",
     "datafake": "yarn clear-db && (node src/database/datafake &) && yarn start",
     "clear-db": "rm -rf src/database/db.sqlite3 && yarn knex migrate:latest",
+    "postinstall": "yarn knex migrate:latest",
     "knex": "knex",
     "jest": "ENV=test jest"
   },
