@@ -44,14 +44,12 @@ module.exports = {
 
   async store(request, response) {
     try {
-      const { id = "", email = "", password = "" } = request.body;
+      const { email, password } = request.body;
 
       const ong = await database("ongs")
-        .where("id", id)
-        .orWhere("email", email)
-        .select("*")
-        .first();
-
+        .where("email", email)
+        .first()
+        .select("*");
       if (!ong) return response.error.notFound("Ong not found");
 
       if (!(await bcrypt.compare(password, ong.password)))

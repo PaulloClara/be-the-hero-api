@@ -37,14 +37,11 @@ module.exports = {
       const { name, email, password, whatsapp, city, uf } = request.body;
 
       const id = randomBytes(4).toString("HEX");
-
       const ong = await database("ongs")
         .where("email", email)
         .first();
       if (ong) return response.error.badRequest("Email is already being used");
 
-      if (!password)
-        return response.error.badRequest("Password field is required");
       passwordHash = await bcrypt.hash(password);
 
       await database("ongs").insert({
@@ -61,11 +58,6 @@ module.exports = {
 
       return response.status(200).json({ id, token });
     } catch (error) {
-      if (error.code === "SQLITE_CONSTRAINT" && error.errno === 19)
-        return response.error.badRequest(
-          "The ong could not be saved, check that all fields are valid!"
-        );
-
       return response.error.internalError(error);
     }
   }

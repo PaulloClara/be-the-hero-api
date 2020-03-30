@@ -5,18 +5,34 @@ module.exports = {
     try {
       const { page = 1 } = request.query;
 
-      const incidents = await database("incidents")
-        .join("ongs", "ongs.id", "=", "incidents.ong_id")
-        .limit(12)
-        .offset((page - 1) * 12)
-        .select([
-          "incidents.*",
-          "ongs.name",
-          "ongs.email",
-          "ongs.whatsapp",
-          "ongs.city",
-          "ongs.uf"
-        ]);
+      const incidents = (
+        await database("incidents")
+          .join("ongs", "ongs.id", "=", "incidents.ong_id")
+          .limit(12)
+          .offset((page - 1) * 12)
+          .select([
+            "incidents.*",
+            "ongs.name",
+            "ongs.email",
+            "ongs.whatsapp",
+            "ongs.city",
+            "ongs.uf"
+          ])
+      ).map(incident => ({
+        id: incident.id,
+        title: incident.title,
+        value: incident.value,
+        description: incident.description,
+        created_at: incident.created_at,
+        ong: {
+          id: incident.ong_id,
+          name: incident.name,
+          email: incident.email,
+          whatsapp: incident.whatsapp,
+          city: incident.city,
+          uf: incident.uf
+        }
+      }));
 
       const [count] = await database("incidents").count();
       response.header("X-Total-Count", count["count(*)"]);
@@ -41,11 +57,6 @@ module.exports = {
 
       return response.status(200).json({ id });
     } catch (error) {
-      if (error.code === "SQLITE_CONSTRAINT" && error.errno === 19)
-        return response.error.badRequest(
-          "The incident could not be saved, check that all fields are valid!"
-        );
-
       return response.error.internalError(error);
     }
   },
