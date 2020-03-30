@@ -8,8 +8,10 @@
   "scripts": {
     "start": "ENV=production node .",
     "dev": "ENV=development nodemon .",
+    "datafake": "yarn clear-db && (node src/database/datafake &) && yarn start",
+    "clear-db": "rm -rf src/database/db.sqlite3 && yarn knex migrate:latest",
     "knex": "knex",
-    "test": "ENV=test jest"
+    "jest": "ENV=test jest"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",

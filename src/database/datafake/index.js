@@ -35,6 +35,8 @@ setTimeout(() => {
 const ongs = JSON.parse(readFile(resolve(__dirname, "ongs.json")));
 const incidents = JSON.parse(readFile(resolve(__dirname, "incidents.json")));
 
-ongs.forEach(async ong => {
-  await sendRequest("ongs", ong);
-});
+setTimeout(() => {
+  ongs.forEach(async ong => {
+    await sendRequest("ongs", ong);
+  });
+}, 6000);
