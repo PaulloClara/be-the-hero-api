@@ -1,6 +1,22 @@
+const errors = {
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  500: "Internal Server Error"
+};
+
 module.exports = {
-  newError(message, code) {
-    this.response.status(code).json({ error: message });
+  newError(message, statusCode) {
+    this.response.status(statusCode).json({
+      statusCode,
+      error: errors[statusCode],
+      message,
+      validation: {
+        source: "running",
+        keys: []
+      }
+    });
   },
 
   badRequest(message) {
