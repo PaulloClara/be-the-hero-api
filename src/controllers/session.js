@@ -34,6 +34,7 @@ module.exports = {
 
       const incidents = await database("incidents")
         .where("ong_id", ong_id)
+        .orderBy("created_at", "desc")
         .select("*");
 
       return response.status(200).json(incidents);

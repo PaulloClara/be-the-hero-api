@@ -8,6 +8,7 @@ module.exports = {
       const incidents = (
         await database("incidents")
           .join("ongs", "ongs.id", "=", "incidents.ong_id")
+          .orderBy("created_at", "desc")
           .limit(12)
           .offset((page - 1) * 12)
           .select([

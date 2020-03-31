@@ -11,6 +11,7 @@ module.exports = {
       const { page = 1 } = request.query;
 
       const ongs = await database("ongs")
+        .orderBy("created_at", "desc")
         .limit(12)
         .offset((page - 1) * 12)
         .select([
