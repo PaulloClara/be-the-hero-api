@@ -6,11 +6,14 @@
   "author": "paulloclara <paulloclara@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ENV=production yarn knex migrate:latest && node .",
+    "start": "ENV=production node .",
     "dev": "ENV=development nodemon .",
-    "datafake": "yarn clear-db && (node src/database/datafake &) && yarn start",
-    "clear-db": "rm -rf src/database/db.sqlite3 && yarn knex migrate:latest",
+    "prestart": "yarn migration && yarn datafake",
     "postinstall": "yarn knex migrate:latest",
+    "datafake": "(node src/database/datafake &)",
+    "clearDB": "rm -rf src/database/db.sqlite3 && yarn migration",
+    "applyDatafake": "yarn clearDB && yarn datafake && yarn start",
+    "migration": "yarn knex migrate:latest",
     "knex": "knex",
     "jest": "ENV=test jest"
   },
