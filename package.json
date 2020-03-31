@@ -6,7 +6,7 @@
   "author": "paulloclara <paulloclara@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ENV=production node .",
+    "start": "ENV=production yarn knex migrate:latest && node .",
     "dev": "ENV=development nodemon .",
     "datafake": "yarn clear-db && (node src/database/datafake &) && yarn start",
     "clear-db": "rm -rf src/database/db.sqlite3 && yarn knex migrate:latest",
