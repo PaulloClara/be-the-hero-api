@@ -3,11 +3,15 @@ const { resolve } = require("path");
 const { readFileSync: readFile } = require("fs");
 
 const tokens = [];
+const baseURL =
+  process.env.ENV === "development"
+    ? "http://localhost:3000"
+    : "https://api-bethehero-omnistack11.herokuapp.com";
 
 function sendRequest(route, data, token) {
   return request(
     {
-      url: `http://localhost:3000/${route}`,
+      url: `${baseURL}/${route}`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@
     "start": "ENV=production node .",
     "dev": "ENV=development nodemon .",
     "prestart": "yarn migration && yarn datafake",
-    "postinstall": "yarn knex migrate:latest",
+    "postinstall": "yarn migration",
     "datafake": "(node src/database/datafake &)",
     "clearDB": "rm -rf src/database/db.sqlite3 && yarn migration",
     "applyDatafake": "yarn clearDB && yarn datafake && yarn start",
