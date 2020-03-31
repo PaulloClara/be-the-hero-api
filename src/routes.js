@@ -4,12 +4,12 @@ const OngController = require("./controllers/ong");
 const SessionController = require("./controllers/session");
 const IncidentController = require("./controllers/incident");
 
-const AuthorizationMiddleware = require("./middlewares/auth");
 const HandleMiddleware = require("./middlewares/handle");
+const AuthorizationMiddleware = require("./middlewares/auth");
 
 routes.use(HandleMiddleware.setHandleError);
 
-routes.get("/ongs", OngController.index);
+routes.get("/ongs", HandleMiddleware.pagination, OngController.index);
 routes.post("/ongs", HandleMiddleware.ongRegister, OngController.store);
 
 routes.get("/sessions", AuthorizationMiddleware, SessionController.index);
@@ -24,7 +24,7 @@ routes.post(
   SessionController.store
 );
 
-routes.get("/incidents", IncidentController.index);
+routes.get("/incidents", HandleMiddleware.pagination, IncidentController.index);
 routes.post(
   "/incidents",
   AuthorizationMiddleware,

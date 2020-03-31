@@ -41,13 +41,14 @@ module.exports = {
   incidentRegister: celebrate({
     [Segments.BODY]: Joi.object().keys({
       title: Joi.string()
-        .max(100)
+        .max(160)
         .required(),
       description: Joi.string()
-        .max(400)
+        .max(600)
         .required(),
       value: Joi.number()
         .integer()
+        .positive()
         .required()
     })
   }),
@@ -60,6 +61,14 @@ module.exports = {
       password: Joi.string()
         .min(8)
         .required()
+    })
+  }),
+
+  pagination: celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number()
+        .integer()
+        .positive()
     })
   })
 };
