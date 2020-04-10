@@ -3,14 +3,14 @@ const database = require("../database");
 module.exports = {
   async index(request, response) {
     try {
-      const { page = 1 } = request.query;
+      const { page = 1, limit = 12 } = request.query;
 
-      const incidents = (
-        await database("incidents")
+      const incidents = {
+        incidents: (await database("incidents")
           .join("ongs", "ongs.id", "=", "incidents.ong_id")
           .orderBy("created_at", "desc")
-          .limit(12)
-          .offset((page - 1) * 12)
+          .limit(limit)
+          .offset((page - 1) * limit)
           .select([
             "incidents.*",
             "ongs.name",
@@ -18,25 +18,29 @@ module.exports = {
             "ongs.whatsapp",
             "ongs.city",
             "ongs.uf"
-          ])
-      ).map(incident => ({
-        id: incident.id,
-        title: incident.title,
-        value: incident.value,
-        description: incident.description,
-        created_at: incident.created_at,
-        ong: {
-          id: incident.ong_id,
-          name: incident.name,
-          email: incident.email,
-          whatsapp: incident.whatsapp,
-          city: incident.city,
-          uf: incident.uf
-        }
-      }));
+          ])).map(incident => ({
+          id: incident.id,
+          title: incident.title,
+          value: incident.value,
+          description: incident.description,
+          created_at: incident.created_at,
+          ong: {
+            id: incident.ong_id,
+            name: incident.name,
+            email: incident.email,
+            whatsapp: incident.whatsapp,
+            city: incident.city,
+            uf: incident.uf
+          }
+        }))
+      };
 
       const [count] = await database("incidents").count();
       response.header("X-Total-Count", count["count(*)"]);
+
+      incidents.limit = limit;
+      incidents.total = count["count(*)"];
+      incidents.current = page;
 
       return response.status(200).json(incidents);
     } catch (error) {
