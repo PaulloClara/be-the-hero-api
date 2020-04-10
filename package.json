@@ -13,6 +13,7 @@
     "datafake": "(node src/database/datafake &)",
     "clearDB": "rm -rf src/database/db.sqlite3 && yarn migration",
     "applyDatafake": "yarn clearDB && yarn datafake && yarn start",
+    "applyDevDatafake": "yarn clearDB && ENV=development yarn datafake && yarn dev",
     "migration": "yarn knex migrate:latest",
     "knex": "knex",
     "jest": "ENV=test jest"
