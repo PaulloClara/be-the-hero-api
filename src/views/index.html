@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="bulma.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Be The Hero - API</title>
+  </head>
+  <body class="container is-fluid">
+    <header class="container is-fluid">
+      <h1 class="title has-text-centered has-text-grey">
+        API do projeto
+        <a
+          class="has-text-danger"
+          href="https://github.com/paulloclara/be-the-hero"
+          target="_blank"
+        >
+          Be The Hero
+        </a>
+      </h1>
+    </header>
+
+    <main class="container is-fluid">
+      <ul class="columns is-multiline">
+        <li class="column is-full">
+          <div class="card">
+            <header class="card-header">
+              <h4 class="card-header-title">Home</h4>
+            </header>
+
+            <div class="card-content">
+              <span class="tag is-info is-medium">GET</span>
+              <code class="tag is-light is-medium">/</code>
+            </div>
+          </div>
+        </li>
+
+        <li class="column is-full">
+          <div class="card">
+            <header class="card-header">
+              <h4 class="card-header-title">Sessões</h4>
+            </header>
+
+            <div class="card-content">
+              <ul class="columns is-multiline">
+                <li class="column is-full">
+                  <span class="tag is-info is-medium">GET</span>
+                  <code class="tag is-light is-medium">/sessions</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Headers:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Authorization</h6>
+                        <span>
+                          - Token de acesso.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "id": "31d9a54c",
+                          "name": "BeTheHero",
+                          "email": "bethehero@org.com",
+                          "whatsapp": "86987654321",
+                          "city": "Teresina",
+                          "uf": "PI",
+                          "created_at": "2020-04-06 18:37:18"
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+
+                <li class="column is-full">
+                  <span class="tag is-success is-medium">POST</span>
+                  <code class="tag is-light is-big is-medium">/sessions</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Body:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "email": "bethehero@org.com",
+                          "password": "12345678"
+                        }
+                      </code>
+                    </pre>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint">
+                      <code class="lang-json">
+                        {
+                          "ong": {
+                            "id": "31d9a54c",
+                            "name": "BeTheHero",
+                            "email": "bethehero@org.com",
+                            "whatsapp": "86987654321",
+                            "city": "Teresina",
+                            "uf": "PI",
+                            "created_at": "2020-04-06 18:37:18"
+                          },
+                          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+
+                <li class="column is-full">
+                  <span class="tag is-info is-medium">GET</span>
+                  <code class="tag is-light is-big is-medium">
+                    /sessions/incidents
+                  </code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Headers:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Authorization</h6>
+                        <span>
+                          - Token de acesso.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint">
+                      <code class="lang-json">
+                        [
+                          {
+                            "id": 581,
+                            "title": "Novo caso",
+                            "description": "Detalhes do caso",
+                            "value": 220,
+                            "ong_id": "96c206fc",
+                            "created_at": "2020-04-14 08:49:48"
+                          },
+                          ...
+                        ]
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <li class="column is-full">
+          <div class="card">
+            <header class="card-header">
+              <h4 class="card-header-title">ONGs</h4>
+            </header>
+
+            <div class="card-content">
+              <ul class="columns is-multiline">
+                <li class="column is-full">
+                  <span class="tag is-info is-medium">GET</span>
+                  <code class="tag is-light is-medium">/ongs</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Queries:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Page</h6>
+                        <span>
+                          - Positivo inteiro referente a pagina solicitada.
+                        </span>
+                      </li>
+
+                      <li>
+                        <h6 class="tag is-danger">Limit</h6>
+                        <span>
+                          - Positivo inteiro referente a quantidade de itens por
+                          pagina.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">
+                      Exemplo:
+                      <code class="tag is-light">/ongs?page=1&limit=12</code>
+                    </h5>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "ongs": [
+                            {
+                              "id": "96c206fc",
+                              "name": "BeTheHero",
+                              "email": "bethehero@ong.com",
+                              "whatsapp": "86987654321",
+                              "city": "Teresina",
+                              "uf": "PI",
+                              "created_at": "2020-04-06 18:37:18"
+                            },
+                            ...
+                          ],
+                          "limit": 12,
+                          "total": 40
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+
+                <li class="column is-full">
+                  <span class="tag is-success is-medium">POST</span>
+                  <code class="tag is-light is-big is-medium">/ongs</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Body:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "name": "BeTheHero",
+                          "email": "bethehero@ong.com",
+                          "password": "12345678",
+                          "whatsapp": "86987654321",
+                          "city": "Teresina",
+                          "uf": "PI"
+                        }
+                      </code>
+                    </pre>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint">
+                      <code class="lang-json">
+                        {
+                          "ong": {
+                            "id": "96c206fc",
+                            "name": "BeTheHero",
+                            "email": "bethehero@ong.com",
+                            "whatsapp": "86987654321",
+                            "city": "Teresina",
+                            "uf": "PI",
+                            "created_at": "2020-04-06 18:37:18"
+                          },
+                          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <li class="column is-full">
+          <div class="card">
+            <header class="card-header">
+              <h4 class="card-header-title">Casos</h4>
+            </header>
+
+            <div class="card-content">
+              <ul class="columns is-multiline">
+                <li class="column is-full">
+                  <span class="tag is-info is-medium">GET</span>
+                  <code class="tag is-light is-medium">/incidents</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Queries:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Page</h6>
+                        <span>
+                          - Positivo inteiro referente a pagina solicitada.
+                        </span>
+                      </li>
+
+                      <li>
+                        <h6 class="tag is-danger">Limit</h6>
+                        <span>
+                          - Positivo inteiro referente a quantidade de itens por
+                          pagina.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">
+                      Exemplo:
+                      <code class="tag is-light">
+                        /incidents?page=1&limit=12
+                      </code>
+                    </h5>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "incidents": [
+                            {
+                              "id": 1,
+                              "title": "Caso Teste",
+                              "value": 120,
+                              "description": "Caso teste...",
+                              "created_at": "2020-04-10 16:39:35",
+                              "ong": {
+                                "id": "96c206fc",
+                                "name": "BeTheHero",
+                                "email": "bethehero@ong.com",
+                                "whatsapp": "86987654321",
+                                "city": "Teresina",
+                                "uf": "PI",
+                                "created_at": "2020-04-06 18:37:18"
+                              }
+                            },
+                            ...
+                          ],
+                          "limit": 12,
+                          "total": 572,
+                          "current": 1
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+
+                <li class="column is-full">
+                  <span class="tag is-success is-medium">POST</span>
+                  <code class="tag is-light is-big is-medium">/incidents</code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Headers:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Authorization</h6>
+                        <span>
+                          - Token de acesso.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Body:</h5>
+
+                    <pre class="prettyprint lang-json">
+                      <code class="lang-json">
+                        {
+                          "title": "Caso Teste",
+                          "description": "Caso teste...",
+                          "value": 120
+                        }
+                      </code>
+                    </pre>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Response:</h5>
+
+                    <pre class="prettyprint">
+                      <code class="lang-json">
+                        {
+                          "id": 1,
+                          "title": "Caso Teste",
+                          "description": "Caso teste...",
+                          "value": 120,
+                          "created_at": "2020-04-10 16:39:35"
+                        }
+                      </code>
+                    </pre>
+                  </div>
+                </li>
+
+                <li class="column is-full">
+                  <span class="tag is-danger is-medium">DELETE</span>
+                  <code class="tag is-light is-big is-medium">
+                    /incidents/:id
+                  </code>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Parameters:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">ID</h6>
+                        <span>
+                          - Id do caso.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="hero-body m-py-2">
+                    <h5 class="subtitle is-5 m-my-1">Headers:</h5>
+
+                    <ul>
+                      <li>
+                        <h6 class="tag is-danger">Authorization</h6>
+                        <span>
+                          - Token de acesso.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="scripts.js" charset="utf-8"></script>
+  </body>
+</html>

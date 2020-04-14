@@ -1,0 +1,22 @@
+body {
+  padding: 20px 0;
+  background-color: #fcfcfc;
+}
+
+body > header {
+  padding: 10px 0 30px;
+}
+
+.tag.is-medium {
+  font-size: 14px !important;
+}
+
+.m-my-1 {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+.m-py-2 {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
