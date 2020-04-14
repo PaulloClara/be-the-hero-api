@@ -1039,9 +1039,9 @@ caseless@~0.12.0:
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
 celebrate@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/celebrate/-/celebrate-12.0.1.tgz#f5cd71186e98dfc1884c5b063e2640b1627a0851"
-  integrity sha512-QOoWyuOdr3yWC1k4OFmmtYlv7bAz30iz32xMO5ruT46ubqMedIpI3z8egZNLL+7UR+PDA6XjfQKw/lvzfrIyEQ==
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/celebrate/-/celebrate-12.1.0.tgz#95535eeb96632bcfe043b9cf83d22912ab14b184"
+  integrity sha512-Pc7HvN0E+z8RfuB041L27A8ylGUPEXm9h20gWCtAoPJwogyi4SLpFlwxXG8uqPg89kYhOp+yoxh+MXHhn1zLDw==
   dependencies:
     "@hapi/joi" "17.x.x"
     escape-html "1.0.3"
@@ -2977,9 +2977,9 @@ kleur@^3.0.3:
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
 knex@^0.20.13:
-  version "0.20.13"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.20.13.tgz#056c310d963f7efce1b3c7397576add1323f1146"
-  integrity sha512-YVl//Te0G5suc+d9KyeI6WuhtgVlxu6HXYQB+WqrccFkSZAbHqlqZlUMogYG3UoVq69c3kiFbbxgUNkrO0PVfg==
+  version "0.20.14"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.20.14.tgz#607d46a067f37ba2ea50be9aa8fbffef9ff72d12"
+  integrity sha512-RUBIydapgYGguzuw/YQ3+9TPm6d1qkzEQ7XlmLdFuVkn6GsaZhDHSNX1ycInRZZT8j2blHb7YjTXgLKRCHMI0Q==
   dependencies:
     colorette "1.1.0"
     commander "^4.1.1"
