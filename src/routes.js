@@ -1,6 +1,7 @@
 const routes = require("express").Router();
 
 const OngController = require("./controllers/ong");
+const OtherController = require("./controllers/other");
 const SessionController = require("./controllers/session");
 const IncidentController = require("./controllers/incident");
 
@@ -36,5 +37,7 @@ routes.delete(
   AuthorizationMiddleware,
   IncidentController.delete
 );
+
+routes.get("/*", OtherController.index);
 
 module.exports = routes;
